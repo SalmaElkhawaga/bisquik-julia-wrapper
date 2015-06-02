@@ -1234,6 +1234,7 @@ extern "C" int generate_bisquik_graph(int64_t n, int64_t *degrees, int64_t *src,
             for (EdgeType ei=g.p[i]; ei < g.p[i+1]; ++ei) {
                 src[counter] = (int64_t)i;
                 dstn[counter] = (int64_t)g.dst[ei];
+                counter++;
             }
         }
     }

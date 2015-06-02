@@ -51,4 +51,5 @@ function create_graph(p,n,dmax,dmin)
 	degs_vector = convert(Array{Int64,1},ceil(degseq(p,dmax,dmin,n)));
 	A = bisquik_graph(degs_vector,trials,n);
 	return A;
+	#return degs_vector;
 end
