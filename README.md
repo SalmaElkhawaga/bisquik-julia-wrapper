@@ -1,10 +1,14 @@
 Julia usage:
 -----------
-p = 0.5; #powerlaw
-n = 1e4;
-d = floor(n.^(1/2));
-delta = 3;
-A = create_graph(p,n,d,delta);
+p = 0.5 #powerlaw
+
+n = 1e4
+
+d = floor(n.^(1/2))
+
+delta = 3
+
+A = create_graph(p,n,d,delta)
 
 bisquik
 ======= 
