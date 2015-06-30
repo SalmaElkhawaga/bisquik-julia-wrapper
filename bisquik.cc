@@ -656,8 +656,8 @@ public:
     bayati_kim_saberi_uniform_sampler(
 		graph g_, VertexType *degrees_)
     : 
-    max_reject(100), 
-    max_retries(50), 
+    max_reject(200), 
+    max_retries(100), 
     max_reject_strategy(SEARCH_ON_MAX_REJECT),
 	sampling_probability(STANDARD_PROB),
 	nverts(g_.nverts), 
@@ -1229,7 +1229,7 @@ extern "C" int generate_bisquik_graph(int64_t n, int64_t *degrees, int64_t *src,
         
         // now figure out how to write them to src and dstn
         int64_t nedges = 0;
-        int counter = 0;
+        int64_t counter = 0;
         for (VertexType i=0; i<g.nverts; ++i) {
             for (EdgeType ei=g.p[i]; ei < g.p[i+1]; ++ei) {
                 src[counter] = (int64_t)i;
@@ -1237,7 +1237,7 @@ extern "C" int generate_bisquik_graph(int64_t n, int64_t *degrees, int64_t *src,
                 counter++;
             }
         }
-    }
+	}
     free_graph(g);
     return nsamples;
 }

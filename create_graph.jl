@@ -9,7 +9,8 @@ function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
     trial_number = 2;
 	while trial_number <= trials && check_flag == 0
 		@printf("trial number: %i\n",trial_number);
-        degs = convert(Array{Int64},degs + floor(2*rand(length(degs),1)));
+        #degs = convert(Array{Int64},degs + floor(0.001*degs.*rand(length(degs),1)));
+        degs[end] += 1
         if mod(sum(degs),2) != 0
         	degs[end] = degs[end]+1;
         end
