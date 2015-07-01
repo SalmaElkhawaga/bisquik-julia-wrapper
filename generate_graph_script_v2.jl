@@ -1,6 +1,10 @@
+#splitted pagerank to pagerank_solver_v2 and prepagerank
+
+
 include("create_graph.jl")
 include("pagerank_solver_v2.jl")
 include("pre_pagerank_solver.jl")
+include("degseq.jl")
 #Pkg.add("Gadfly")
 #Pkg.add("MAT")
 #using MAT
@@ -8,9 +12,9 @@ function generate_graph_script_v2()
     tStart=time()
     #####################################################
     # This is based on pagerank_solution_nonzeros_v3.m
-    n = [1e4,1e5,1e6,1e7,1e8,1e9]
+    n = [1e4,1e5]#,1e6,1e7,1e8,1e9]
     d = floor(n.^(1/2))
-    delta = 3
+    delta = 2 # min degree
     p = 0.5 # power law
     
     # epsilon accuracy:
@@ -25,7 +29,8 @@ function generate_graph_script_v2()
     NNZEROS = zeros(Int64,length(eps_accuracy),length(alpha),length(n))
     for exp_id = 1:length(n)
         tStart = time()
-        A = create_graph(p,n[exp_id],d[exp_id],delta)
+        
+        A = create_graph(p,int(n[exp_id]),int(d[exp_id]),delta)
         (P,V) = pre_pagerank_solver(A)
         
         for alpha_id = 1:length(alpha)

@@ -1,9 +1,10 @@
-function pre_pagerank_solver(A::SparseMatrixCSC{Int64,Int64})
+function pre_pagerank_solver_v2(ei::Vector{Int64},ej::Vector{Int64},s::Vector{Int64})
     # k is the number of vectors in the experiment
     # we're just picking one now
     # Generate transition matrix P
-    n = size(A,1)
-    s = sum(A,2)
+    #n = size(A,1)
+    n = length(s)
+    #s = sum(A,2)
     
     #idx = 1:n
     #vals = 1./s
@@ -17,16 +18,18 @@ function pre_pagerank_solver(A::SparseMatrixCSC{Int64,Int64})
     #end
     #end;
     
-    (ei,ej) = findnz(A)
-    P = sparse(ei,ej,1./s[ei],size(A,1),size(A,2))
+    #(ei,ej) = findnz(A)
+    P = sparse(ei,ej,1./s[ei],length(s),length(s))
     
     # pick the k vectors to work with:
     # ids = int(1 + floor(rand(k)*n))
     # this is only working when k = 1
-    (mx,id) = findmax(s)
+    
+    # not getting the max since here the max is always the first vector, that's how we construct degs_vector
+    #(mx,id) = findmax(s)
     
     V = zeros(Float64,n)
-    V[id] = 1
+    V[1] = 1
     return (P,V)
 
 end
