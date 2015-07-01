@@ -13,7 +13,7 @@ function generate_graph_script_v3(p::Float64)
     
     #####################################################
     # This is based on pagerank_solution_nonzeros_v3.m
-    n = [10^4,10^5]#[10^8,10^9]
+    n = [10^8,10^9]#[10^6]#[10^4,10^5]#
     d = floor(n.^(1/2))
     delta = 2 # min degree
     # p = 0.5 # power law

@@ -656,8 +656,8 @@ public:
     bayati_kim_saberi_uniform_sampler(
 		graph g_, VertexType *degrees_)
     : 
-    max_reject(200), 
-    max_retries(100), 
+    max_reject(100),
+    max_retries(50),
     max_reject_strategy(SEARCH_ON_MAX_REJECT),
 	sampling_probability(STANDARD_PROB),
 	nverts(g_.nverts), 
