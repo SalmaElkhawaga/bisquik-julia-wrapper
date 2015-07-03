@@ -37,7 +37,7 @@ function generate_graph_script_v3(p::Float64)
         if check_flag == 0
             error("could not generate a graphical sequence")
         else
-        	@printf("Successfully generated a graphical sequence for n = %i.\n",n[exp_id])
+            @printf("Successfully generated a graphical sequence for n = %i.\n",n[exp_id])
             for graph_id = 1:graphs_experiments
                 tStart2 = time()
                 srand(graph_id)
@@ -45,7 +45,7 @@ function generate_graph_script_v3(p::Float64)
                 #nzvals = 1./degs_vector[src]
                 (P,V) = pre_pagerank_solver_v2(src,dst,degs_vector)
                 for alpha_id = 1:length(alpha)
-                	@printf("alpha value = %f\n",alpha[alpha_id])
+                    @printf("alpha value = %f\n",alpha[alpha_id])
                     X = pagerank_solver_v2(P,V,alpha[alpha_id])
                     #X = pagerank_solver_v3(src,dst,nzvals,V,alpha[alpha_id])
                     X_sorted = sort(X,1)
