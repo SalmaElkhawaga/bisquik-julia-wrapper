@@ -13,7 +13,7 @@ function generate_graph_script_v3(p::Float64)
     
     #####################################################
     # This is based on pagerank_solution_nonzeros_v3.m
-    n = [10^8,10^9]#[10^6]#[10^4,10^5]#
+    n = [10^4,10^5,10^6]#[10^8,10^9]#[10^6]#[10^4,10^5]#
     d = floor(n.^(1/2))
     delta = 2 # min degree
     # p = 0.5 # power law
@@ -64,11 +64,11 @@ function generate_graph_script_v3(p::Float64)
             @printf("Elapsed time for n = %i, graph_id = %i is %f seconds.\n",n[exp_id],graph_id,time()-tStart2)
             end
         end
-        @printf("Elapsed time for n = %i is %f seconds.\n",n[exp_id],time()-tStart)
+        @printf("Total elapsed time for n = %i is %f seconds.\n",n[exp_id],time()-tStart)
     end
     
     fname = join(["output", string(p*100),".csv"])
-    writecsv(fname, NNN)
+    writecsv(fname, NNZEROS)
     @printf("Experiment is over, saving to %s\n",fname)
     #filename = matopen("NNZVALS3.mat","w")
     #write(filename,"NNZEROS",NNZEROS)
