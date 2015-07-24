@@ -7,9 +7,10 @@ make
 
 # To generate graphs using julia:
 ```
+include("create_graph.jl")
 p = 0.5;
 n = 10^4;
-d = floor(sqrt(n));
+d = int(floor(sqrt(n)));
 delta = 2;
 A = create_graph(p,n,d,delta);
 ```
