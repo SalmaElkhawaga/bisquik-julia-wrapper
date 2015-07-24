@@ -1,14 +1,20 @@
-Julia usage:
------------
-p = 0.5 #powerlaw
+# To set up bisquik C code:
+cd to directory bisquik-julia-wrapper
+```
+make clean
+make
+```
 
-n = 1e4
+# To generate graphs using julia:
+```
+p = 0.5;
+n = 10^4;
+d = floor(sqrt(n));
+delta = 2;
+A = create_graph(p,n,d,delta);
+```
 
-d = floor(n.^(1/2))
-
-delta = 3
-
-A = create_graph(p,n,d,delta)
+# Original bisquik readme starts here: taken from https://github.com/dgleich/bisquik 
 
 bisquik
 ======= 
