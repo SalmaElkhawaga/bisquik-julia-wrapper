@@ -6,6 +6,7 @@ make
 ```
 
 # To generate graphs using julia:
+From julia:
 ```
 include("create_graph.jl")
 p = 0.5;
