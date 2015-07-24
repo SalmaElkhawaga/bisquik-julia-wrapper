@@ -14,7 +14,8 @@ delta = 2;
 A = create_graph(p,n,d,delta);
 ```
 
-# Original bisquik readme starts here: taken from https://github.com/dgleich/bisquik 
+# Previous README:
+Original bisquik readme starts here: taken from https://github.com/dgleich/bisquik 
 
 bisquik
 ======= 
