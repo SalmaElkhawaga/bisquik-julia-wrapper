@@ -3,12 +3,13 @@ cd to directory bisquik-julia-wrapper
 ```
 make clean
 make
+julia
 ```
 
 # To generate graphs using julia:
 From julia:
 ```
-include("create_graph.jl")
+include("create_graph_funcs.jl")
 p = 0.5;
 n = 10^4;
 d = int(floor(sqrt(n)));

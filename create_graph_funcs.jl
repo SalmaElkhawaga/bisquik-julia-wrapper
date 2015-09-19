@@ -1,5 +1,3 @@
-module create_graph_funcs
-
 s = stat("libbisquik.so")
 if s.size == 0
     const libpath = string(pwd(), "/libbisquik.dylib")
@@ -106,4 +104,3 @@ function create_graph(degs_vector::Vector{Int64},n::Int64)
 	(src,dst) = bisquik_graph2(degs_vector,n)
 	return (src,dst)
 end
-end #end module
