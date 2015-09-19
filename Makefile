@@ -12,7 +12,7 @@ endif
 CURDIR := $(shell pwd)
 BISQUIKLIBNAME := libbisquik.$(SHAREDLIB_EXT)
 SFUTILLIBNAME := libsfutil.$(SHAREDLIB_EXT)
-#$(info $$var is [${SFUTILLIBNAME}])
+
 
 CC:=$(CXX)
 CXXFLAGS += -std=c++0x -U__STRICT_ANSI__ -O3
@@ -28,7 +28,9 @@ bisquik: $(OBJS)
 	g++ $(CXXFLAGS) -fPIC -c bisquik.cc sf_util.cc
 	g++ $(SHAREDLIB_FLAG) -o $(SFUTILLIBNAME) sf_util.o
 	g++ $(SHAREDLIB_FLAG) -o $(BISQUIKLIBNAME) $(SFUTILLIBNAME) bisquik.o sf_util.o
-	export LD_LIBRARY_PATH=$(CURDIR):$$LD_LIBRARY_PATH
+	
+        # used to use this to fix lib paths:
+        # export LD_LIBRARY_PATH=$(CURDIR):$$LD_LIBRARY_PATH
 	
 
 perf: bisquik

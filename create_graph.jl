@@ -1,8 +1,17 @@
+module create_graph_funcs
+
+s = stat("libbisquik.so")
+if s.size == 0
+    const libpath = string(pwd(), "/libbisquik.dylib")
+else
+    const libpath = string(pwd(), "/libbisquik.so")
+end
+
 include("degseq.jl");
 function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
 	trial_number = 1;
     @printf("trial number: %i\n",trial_number);
-    check_flag = ccall ( (:check_graphical_sequence, :libbisquik),
+    check_flag = ccall ( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs); # actual args
@@ -14,7 +23,7 @@ function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
         if mod(sum(degs),2) != 0
         	degs[end] = degs[end]+1;
         end
-        check_flag = ccall ( (:check_graphical_sequence, :libbisquik),
+        check_flag = ccall ( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs); # actual args
@@ -26,7 +35,7 @@ function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
         nedges = sum(degs)
         src = zeros(Int64, nedges)
         dst = zeros(Int64, nedges)
-        rval = ccall ( (:generate_bisquik_graph, :libbisquik),
+        rval = ccall ( (:generate_bisquik_graph, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}, Ptr{Int64}, Ptr{Int64}), # arg types
                         length(degs), degs, src, dst) # actual args
@@ -47,7 +56,7 @@ end
 function check_graphical_sequence(degs::Array{Int64},trials::Int64,n::Int64)
 	trial_number = 1;
     @printf("trial number: %i\n",trial_number);
-    check_flag = ccall ( (:check_graphical_sequence, :libbisquik),
+    check_flag = ccall ( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs); # actual args
@@ -59,7 +68,7 @@ function check_graphical_sequence(degs::Array{Int64},trials::Int64,n::Int64)
         if mod(sum(degs),2) != 0
         	degs[end] = degs[end]+1;
         end
-        check_flag = ccall ( (:check_graphical_sequence, :libbisquik),
+        check_flag = ccall ( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs); # actual args
@@ -74,7 +83,7 @@ function bisquik_graph2(degs::Array{Int64},n::Int64)
     nedges = sum(degs)
     src = zeros(Int64, nedges)
     dst = zeros(Int64, nedges)
-    rval = ccall ( (:generate_bisquik_graph, :libbisquik),
+    rval = ccall ( (:generate_bisquik_graph, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}, Ptr{Int64}, Ptr{Int64}), # arg types
                         length(degs), degs, src, dst) # actual args
@@ -92,7 +101,9 @@ function create_graph(p::Float64,n::Int64,dmax::Int64,dmin::Int64)
 	return A
 end
 
+# if we just want to look at src and dst
 function create_graph(degs_vector::Vector{Int64},n::Int64)
 	(src,dst) = bisquik_graph2(degs_vector,n)
 	return (src,dst)
 end
+end #end module
