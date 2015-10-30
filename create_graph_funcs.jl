@@ -1,8 +1,7 @@
-s = stat("libbisquik.so")
-if s.size == 0
-    const libpath = string(pwd(), "/libbisquik.dylib")
-else
+if OS_NAME == :Linux
     const libpath = string(pwd(), "/libbisquik.so")
+else
+    const libpath = string(pwd(), "/libbisquik.dylib")
 end
 
 include("degseq.jl");
