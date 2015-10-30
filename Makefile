@@ -23,12 +23,12 @@ OBJS=bisquik.o sf_util.o
 bisquik.o: bisquik_opts.hpp sparfun_util.h
 
 bisquik: $(OBJS)
-        g++ $(CXXFLAGS) -fPIC -c bisquik.cc sf_util.cc
-        g++ $(SHAREDLIB_FLAG) -o $(SFUTILLIBNAME) sf_util.o
-        g++ $(SHAREDLIB_FLAG) -o $(BISQUIKLIBNAME) $(SFUTILLIBNAME) bisquik.o sf_util.o
-        
-        # used to use this to fix lib paths:                                                                                                                                       
-        # export LD_LIBRARY_PATH=$(CURDIR):$$LD_LIBRARY_PATH                                                                                                                       
+    g++ $(CXXFLAGS) -fPIC -c bisquik.cc sf_util.cc
+    g++ $(SHAREDLIB_FLAG) -o $(SFUTILLIBNAME) sf_util.o
+    g++ $(SHAREDLIB_FLAG) -o $(BISQUIKLIBNAME) $(SFUTILLIBNAME) bisquik.o sf_util.o
+    
+    # used to use this to fix lib paths:
+    # export LD_LIBRARY_PATH=$(CURDIR):$$LD_LIBRARY_PATH                                                                                                                       
         
 
 perf: bisquik
