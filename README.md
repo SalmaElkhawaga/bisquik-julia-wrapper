@@ -15,7 +15,7 @@ n = 10^4;
 d = round(Int,sqrt(n));
 delta = 2;
 (src,dst,l) = create_graph(p,n,d,delta);
-A = sparse(src, dst, 1, l, l);
+A = sparse(src, dst, 1, n, n);
 ```
 
 # Previous README:
