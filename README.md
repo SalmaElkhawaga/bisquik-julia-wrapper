@@ -12,9 +12,10 @@ From julia:
 include("create_graph_funcs.jl")
 p = 0.5;
 n = 10^4;
-d = int(floor(sqrt(n)));
+d = round(Int,sqrt(n));
 delta = 2;
-A = create_graph(p,n,d,delta);
+(src,dst,l) = create_graph(p,n,d,delta);
+A = sparse(src, dst, 1, l, l);
 ```
 
 # Previous README:
