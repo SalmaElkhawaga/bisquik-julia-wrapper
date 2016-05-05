@@ -79,5 +79,5 @@ function create_graph(p::Float64,n::Int64,dmax::Int64,dmin::Int64)
    	trials = 5
 	degs_vector = convert(Array{Int64,1},ceil(degseq(p,n,dmax,dmin)))
 	(src,dst,l) = bisquik_graph(degs_vector,trials,n)
-	return (src,dst,l)
+	return (src,dst,degs_vector)
 end
