@@ -1,3 +1,4 @@
+# from older julia releases, we used to do the following:
 # if OS_NAME == :Linux
 #     const libpath = string(pwd(), "/libbisquik.so")
 # else
