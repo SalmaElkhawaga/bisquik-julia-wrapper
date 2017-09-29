@@ -1,14 +1,15 @@
-if OS_NAME == :Linux
-    const libpath = string(pwd(), "/libbisquik.so")
-else
-    const libpath = string(pwd(), "/libbisquik.dylib")
-end
+# if OS_NAME == :Linux
+#     const libpath = string(pwd(), "/libbisquik.so")
+# else
+#     const libpath = string(pwd(), "/libbisquik.dylib")
+# end
+const libpath = string(pwd(), "/libbisquik")
 
 include("degseq.jl")
 function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
     trial_number = 1
     @printf("trial number: %i\n",trial_number)
-    check_flag = ccall ( (:check_graphical_sequence, libpath),
+    check_flag = ccall( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs); # actual args
@@ -19,7 +20,7 @@ function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
         if mod(sum(degs),2) != 0
             degs[end] = degs[end]+1
         end
-        check_flag = ccall ( (:check_graphical_sequence, libpath),
+        check_flag = ccall( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs) # actual args
@@ -31,7 +32,7 @@ function bisquik_graph(degs::Array{Int64},trials::Int64,n::Int64)
         nedges = sum(degs)
         src = zeros(Int64, nedges)
         dst = zeros(Int64, nedges)
-        rval = ccall ( (:generate_bisquik_graph, libpath),
+        rval = ccall( (:generate_bisquik_graph, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}, Ptr{Int64}, Ptr{Int64}), # arg types
                         length(degs), degs, src, dst) # actual args
@@ -53,7 +54,7 @@ end
 function check_graphical_sequence(degs::Array{Int64},trials::Int64,n::Int64)
     trial_number = 1
     @printf("trial number: %i\n",trial_number)
-    check_flag = ccall ( (:check_graphical_sequence, libpath),
+    check_flag = ccall( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs) # actual args
@@ -64,13 +65,13 @@ function check_graphical_sequence(degs::Array{Int64},trials::Int64,n::Int64)
         if mod(sum(degs),2) != 0
             degs[end] = degs[end]+1
         end
-        check_flag = ccall ( (:check_graphical_sequence, libpath),
+        check_flag = ccall( (:check_graphical_sequence, libpath),
                         Cint, # return value
                         (Int64, Ptr{Int64}), # arg types
                         n, degs) # actual args
         trial_number = trial_number + 1
     end
-    return (degs,check_flag)
+    return degs,check_flag
 end
 
 
